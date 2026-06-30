@@ -3,6 +3,7 @@
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import LocaleLink from "@/components/i18n/LocaleLink";
 import { useT } from "@/components/i18n/I18nProvider";
 import { stagger, fadeUp } from "@/lib/animations";
@@ -43,20 +44,44 @@ function TiltCard({ children, className = "" }: { children: React.ReactNode; cla
 
 // Transparent 3-D images (Microsoft Fluent Emoji, MIT-licensed) served via CDN.
 const EMOJI_CDN = "https://cdn.jsdelivr.net/gh/microsoft/fluentui-emoji@main/assets";
-const serviceMeta = [
-  { img: "Laptop/3D/laptop_3d.png", glow: "bg-blue-200" },
-  { img: "Robot/3D/robot_3d.png", glow: "bg-violet-200" },
-  { img: "Gear/3D/gear_3d.png", glow: "bg-amber-200" },
-  { img: "Artist palette/3D/artist_palette_3d.png", glow: "bg-pink-200" },
-  { img: "Chart increasing/3D/chart_increasing_3d.png", glow: "bg-emerald-200" },
-  { img: "Mobile phone/3D/mobile_phone_3d.png", glow: "bg-orange-200" },
+const serviceImages = [
+  "Laptop/3D/laptop_3d.png",
+  "Robot/3D/robot_3d.png",
+  "Gear/3D/gear_3d.png",
+  "Artist palette/3D/artist_palette_3d.png",
+  "Chart increasing/3D/chart_increasing_3d.png",
+  "Mobile phone/3D/mobile_phone_3d.png",
 ];
+
+/* ── One service card: floating 3-D icon over an amber wash + title. ── */
+function ServiceCard({ title, img }: { title: string; img: string }) {
+  return (
+    <TiltCard className="group h-full overflow-hidden rounded-2xl border border-amber-200 bg-white shadow-lg shadow-amber-500/10 transition-all duration-300 cursor-pointer hover:border-primary hover:shadow-xl hover:shadow-amber-500/25">
+      <div className="relative flex h-32 items-center justify-center bg-linear-to-b from-amber-50 to-transparent">
+        <div className="absolute h-24 w-24 rounded-full bg-primary/25 opacity-70 blur-2xl" />
+        <div className="absolute bottom-5 h-2.5 w-20 rounded-[50%] bg-amber-900/10 blur-md" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={encodeURI(`${EMOJI_CDN}/${img}`)}
+          alt={title}
+          width={96}
+          height={96}
+          loading="lazy"
+          className="relative h-20 w-20 object-contain drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
+        />
+      </div>
+      <div className="px-4 pb-5 text-center">
+        <h3 className="font-black text-base text-foreground">{title}</h3>
+      </div>
+    </TiltCard>
+  );
+}
 
 export default function Services() {
   const t = useT();
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="pt-8 pb-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="flex flex-col items-center text-center mb-10">
           <motion.h2 variants={fadeUp} className="text-3xl sm:text-4xl font-black tracking-tight text-foreground">
@@ -64,34 +89,30 @@ export default function Services() {
           </motion.h2>
         </motion.div>
 
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {t.services.items.map((s, i) => {
-            const m = serviceMeta[i];
-            return (
-              <motion.div key={s.title} variants={fadeUp}>
-                <TiltCard className="group h-full overflow-hidden rounded-2xl border border-border bg-white hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 cursor-pointer">
-                  {/* Floating 3-D image (transparent PNG) over a soft colored halo */}
-                  <div className="relative flex h-44 items-center justify-center">
-                    <div className={`absolute h-32 w-32 rounded-full ${m.glow} opacity-60 blur-2xl`} />
-                    <div className="absolute bottom-7 h-3 w-24 rounded-[50%] bg-black/10 blur-md" />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={encodeURI(`${EMOJI_CDN}/${m.img}`)}
-                      alt={s.title}
-                      width={112}
-                      height={112}
-                      loading="lazy"
-                      className="relative h-28 w-28 object-contain drop-shadow-xl transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                  {/* Label */}
-                  <div className="px-5 pb-6 text-center">
-                    <h3 className="font-black text-lg text-foreground">{s.title}</h3>
-                  </div>
-                </TiltCard>
-              </motion.div>
-            );
-          })}
+        {/* Mobile: swipeable shadcn carousel (one card, next one peeking) */}
+        <Carousel opts={{ align: "start" }} className="sm:hidden">
+          <CarouselContent>
+            {t.services.items.map((s, i) => (
+              <CarouselItem key={s.title} className="basis-4/5">
+                <ServiceCard title={s.title} img={serviceImages[i]} />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+
+        {/* Tablet & up: grid */}
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="hidden gap-8 sm:grid sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {t.services.items.map((s, i) => (
+            <motion.div key={s.title} variants={fadeUp}>
+              <ServiceCard title={s.title} img={serviceImages[i]} />
+            </motion.div>
+          ))}
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="text-center mt-10">

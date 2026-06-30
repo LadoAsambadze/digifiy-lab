@@ -39,22 +39,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pt-3">
-      {/* Same container as every section, so the logo and CTA sit exactly
-          on the page content line; the glass extends past it by its own
-          padding (negative margins cancel the internal padding). */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.nav
-          initial={{ y: -72, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
-          className={cn(
-            "-mx-3 flex h-16 items-center justify-between rounded-xl px-3 backdrop-blur-xl transition-all duration-300 sm:-mx-4 sm:px-4",
-            scrolled
-              ? "bg-[#16202e]/95 ring-1 ring-white/10 shadow-float"
-              : "bg-[#16202e]/70 ring-1 ring-white/10 shadow-soft"
-          )}
-        >
+    <header className="fixed inset-x-0 top-0 z-50">
+      {/* Full-width bar; content stays aligned to the page container inside. */}
+      <motion.nav
+        initial={{ y: -72, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.55, ease: [0.21, 0.47, 0.32, 0.98] }}
+        className={cn(
+          "border-b border-white/10 backdrop-blur-xl transition-all duration-300",
+          scrolled ? "bg-[#16202e]/95 shadow-float" : "bg-[#16202e]/95 shadow-soft"
+        )}
+      >
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <LocaleLink href="/" className="group flex shrink-0 items-center">
           <Logo dark />
@@ -152,8 +148,8 @@ export default function Navbar() {
             </SheetContent>
           </Sheet>
         </div>
-        </motion.nav>
-      </div>
+        </div>
+      </motion.nav>
     </header>
   );
 }

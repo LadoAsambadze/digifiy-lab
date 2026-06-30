@@ -74,7 +74,8 @@ export default function AiSpotlight() {
             >
               {ai.title} <span className="gradient-text">{ai.titleHighlight}</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-4 max-w-lg text-lg leading-relaxed text-white/55">
+            {/* Hidden for now — kept to reuse this copy elsewhere later. */}
+            <motion.p variants={fadeUp} className="hidden mt-4 max-w-lg text-lg leading-relaxed text-white/55">
               {ai.subtitle}
             </motion.p>
 

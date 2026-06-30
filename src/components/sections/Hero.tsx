@@ -104,7 +104,7 @@ export default function Hero() {
               className="mt-8 flex flex-col items-stretch gap-4 lg:items-start"
             >
               <LocaleLink href="/services">
-                <button className="btn-shine group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#f7a92b] px-8 text-base font-bold text-[#1f1300] shadow-brand transition-all duration-200 hover:bg-amber-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:w-96">
+                <button className="btn-shine group inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#f7a92b] px-8 text-base font-bold text-white shadow-brand transition-all duration-200 hover:bg-amber-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:w-96">
                   {t.common.chooseService}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 rtl:rotate-180" />
                 </button>
