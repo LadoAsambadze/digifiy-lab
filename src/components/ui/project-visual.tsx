@@ -5,11 +5,15 @@
    cards look like real product shots instead of placeholders.
 ───────────────────────────────────────────────────────── */
 
+import Image from "next/image";
+
 type Props = {
   /** Tailwind gradient classes, e.g. "from-blue-500 to-violet-600" */
   gradient: string;
   /** Project category — picks which mockup to render */
   category: string;
+  /** Optional real project photo — renders instead of the abstract mockup */
+  image?: string;
   className?: string;
 };
 
@@ -91,9 +95,23 @@ function BrandMock() {
   );
 }
 
-export function ProjectVisual({ gradient, category, className = "" }: Props) {
+export function ProjectVisual({ gradient, category, image, className = "" }: Props) {
   const isMobile = /mobile/i.test(category);
   const isBrand = /brand/i.test(category);
+
+  if (image) {
+    return (
+      <div className={`relative w-full h-full overflow-hidden ${className}`}>
+        <Image
+          src={image}
+          alt={category}
+          fill
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+          className="object-cover"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`relative w-full h-full bg-gradient-to-br ${gradient} overflow-hidden ${className}`}>

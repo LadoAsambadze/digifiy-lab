@@ -157,12 +157,15 @@ const en = {
   portfolio: {
     categories: ["All", "Web Dev", "UI/UX", "Branding", "Mobile"],
     items: [
-      { title: "E-Commerce Platform", category: "Web Dev", desc: "Full-stack online store with payment integration and real-time inventory." },
-      { title: "SaaS Dashboard", category: "UI/UX", desc: "Real-time analytics interface with custom data visualizations." },
-      { title: "Restaurant Brand & Web", category: "Branding", desc: "Complete identity system for a premium Georgian restaurant." },
-      { title: "Fitness Tracking App", category: "Mobile", desc: "Cross-platform app for workout tracking and progress." },
-      { title: "Law Firm Website", category: "Web Dev", desc: "Professional site with case management and consultation booking." },
-      { title: "Real Estate Portal", category: "Web Dev", desc: "Property listing platform with map integration." },
+      { title: "Chateau Iveri", category: "Web Dev", desc: "Winery & hospitality website with immersive visuals, tastings, and stay bookings for a Georgian vineyard estate." },
+      { title: "SBuilding", category: "Web Dev", desc: "Construction & real estate developer site showcasing residential tower projects in Batumi." },
+      { title: "AISI Group", category: "Web Dev", desc: "Real estate investment platform for premium residential and commercial developments." },
+      { title: "Daud Travel", category: "Web Dev", desc: "Tourism company website for booking Georgian tours, transfers, and adventures." },
+      { title: "United Company", category: "Web Dev", desc: "Construction & real estate portal for apartments, houses, and commercial property in Batumi." },
+      { title: "Roommate", category: "Web Dev", desc: "Roommate-matching platform for finding rooms, apartments, and flatmates." },
+      { title: "Prestige Audit", category: "Web Dev", desc: "Financial audit, tax, and business consulting firm website." },
+      { title: "GB Valuation", category: "Web Dev", desc: "Certified property & asset valuation platform for legal and insurance purposes." },
+      { title: "Geo Care Group", category: "Web Dev", desc: "Non-emergency medical transportation service website for booking rides and services." },
     ],
     page: {
       badge: "Our Work",

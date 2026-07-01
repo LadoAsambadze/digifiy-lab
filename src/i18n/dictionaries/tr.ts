@@ -159,12 +159,15 @@ const tr: Dictionary = {
   portfolio: {
     categories: ["Tümü", "Web", "UI/UX", "Marka", "Mobil"],
     items: [
-      { title: "E-Ticaret Platformu", category: "Web", desc: "Ödeme entegrasyonu ve gerçek zamanlı stok içeren tam kapsamlı çevrimiçi mağaza." },
-      { title: "SaaS Paneli", category: "UI/UX", desc: "Özel veri görselleştirmeleri içeren gerçek zamanlı analiz arayüzü." },
-      { title: "Restoran Markası ve Sitesi", category: "Marka", desc: "Premium bir Gürcü restoranı için eksiksiz kimlik sistemi." },
-      { title: "Fitness Takip Uygulaması", category: "Mobil", desc: "Antrenman ve ilerleme takibi için çapraz platform uygulama." },
-      { title: "Hukuk Bürosu Sitesi", category: "Web", desc: "Dava yönetimi ve danışmanlık randevusu içeren profesyonel site." },
-      { title: "Emlak Portalı", category: "Web", desc: "Harita entegrasyonlu emlak ilan platformu." },
+      { title: "Chateau Iveri", category: "Web", desc: "Gürcü bir şaraphane malikanesi için etkileyici görseller, tadımlar ve konaklama rezervasyonuna sahip şarap ve konaklama sitesi." },
+      { title: "SBuilding", category: "Web", desc: "Batum'da konut projelerini sergileyen bir inşaat ve gayrimenkul geliştirici sitesi." },
+      { title: "AISI Group", category: "Web", desc: "Premium konut ve ticari projeler için gayrimenkul yatırım platformu." },
+      { title: "Daud Travel", category: "Web", desc: "Gürcistan'da tur, transfer ve macera rezervasyonu için turizm şirketi sitesi." },
+      { title: "United Company", category: "Web", desc: "Batum'da daire, ev ve ticari mülkler için inşaat ve gayrimenkul portalı." },
+      { title: "Roommate", category: "Web", desc: "Ev arkadaşı, oda ve daire bulmak için eşleştirme platformu." },
+      { title: "Prestige Audit", category: "Web", desc: "Mali denetim, vergi ve iş danışmanlığı şirketi sitesi." },
+      { title: "GB Valuation", category: "Web", desc: "Hukuki ve sigorta amaçlı sertifikalı mülk ve varlık değerleme platformu." },
+      { title: "Geo Care Group", category: "Web", desc: "Acil olmayan tıbbi ulaşım hizmeti rezervasyon sitesi." },
     ],
     page: {
       badge: "Çalışmalarımız",

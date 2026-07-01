@@ -12,13 +12,18 @@ import { useT, useI18n } from "@/components/i18n/I18nProvider";
 import { stagger, fadeUp } from "@/lib/animations";
 
 /* ── 3D Portfolio carousel ── */
-const carouselMeta = [
-  { tags: ["Next.js", "Stripe"], color: "from-blue-500 to-violet-600" },
-  { tags: ["React", "Recharts"], color: "from-violet-500 to-pink-600" },
-  { tags: ["Figma", "GSAP"], color: "from-orange-500 to-rose-600" },
-  { tags: ["React Native", "Firebase"], color: "from-emerald-500 to-teal-700" },
-  { tags: ["Next.js", "Sanity"], color: "from-slate-500 to-gray-700" },
-  { tags: ["Mapbox", "Prisma"], color: "from-cyan-500 to-blue-700" },
+type CarouselMeta = { tags: string[]; color: string; image?: string; link?: string };
+
+const carouselMeta: CarouselMeta[] = [
+  { tags: ["Next.js", "Framer Motion"], color: "from-amber-600 to-rose-800", image: "/portfolio/chateau-iveri.jpg", link: "https://www.chateauiveri.ge/en" },
+  { tags: ["Web Design", "Real Estate"], color: "from-blue-600 to-slate-800", image: "/portfolio/sbuilding.jpg", link: "https://sbuilding.ge/en" },
+  { tags: ["Web Design", "Investment"], color: "from-slate-600 to-zinc-800", image: "/portfolio/aisigroup.jpg", link: "https://aisigroup.ge/en" },
+  { tags: ["Web Design", "Tourism"], color: "from-emerald-600 to-teal-800", image: "/portfolio/daudtravel.jpg", link: "https://daudtravel.com/en" },
+  { tags: ["Web Design", "Real Estate"], color: "from-sky-600 to-blue-800", image: "/portfolio/unitedcompany.jpg", link: "https://unitedcompany.ge/?lang=en" },
+  { tags: ["Web App", "Matching"], color: "from-green-600 to-emerald-800", image: "/portfolio/roommate.jpg", link: "https://roommate.ge/en" },
+  { tags: ["Web Design", "Consulting"], color: "from-indigo-600 to-blue-900", image: "/portfolio/prestigeaudit.jpg", link: "https://prestigeaudit.ge/" },
+  { tags: ["Web Design", "Certification"], color: "from-cyan-600 to-slate-800", image: "/portfolio/gbvaluation.jpg", link: "https://www.gbvaluation.ge/en" },
+  { tags: ["Web Design", "Healthcare"], color: "from-red-600 to-blue-900", image: "/portfolio/geocaregroup.jpg", link: "https://geocaregroupllc.com/" },
 ];
 
 function Carousel3D() {
@@ -66,11 +71,14 @@ function Carousel3D() {
                 transition={{ type: "spring", stiffness: 280, damping: 32 }}
                 className="absolute w-[300px] sm:w-[340px] cursor-pointer select-none"
                 style={{ zIndex: s.zIndex as number }}
-                onClick={() => s.zIndex !== 10 && setActive(i)}
+                onClick={() => {
+                  if (s.zIndex !== 10) setActive(i);
+                  else if (carouselMeta[i].link) window.open(carouselMeta[i].link, "_blank", "noopener,noreferrer");
+                }}
               >
                 <div className="rounded-2xl border border-border bg-white overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                   <div className="h-48 relative overflow-hidden">
-                    <ProjectVisual gradient={carouselMeta[i].color} category={p.category} />
+                    <ProjectVisual gradient={carouselMeta[i].color} category={p.category} image={carouselMeta[i].image} />
                     <div className="absolute top-3 start-3 z-10">
                       <span className="text-xs bg-white/20 backdrop-blur-sm text-white px-2.5 py-1 rounded-full font-semibold border border-white/25">
                         {p.category}

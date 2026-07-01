@@ -158,12 +158,15 @@ const ja: Dictionary = {
   portfolio: {
     categories: ["すべて", "ウェブ", "UI/UX", "ブランド", "モバイル"],
     items: [
-      { title: "Eコマースプラットフォーム", category: "ウェブ", desc: "決済統合とリアルタイム在庫を備えたフルスタックのオンラインストア。" },
-      { title: "SaaS ダッシュボード", category: "UI/UX", desc: "カスタムデータ可視化を備えたリアルタイム分析インターフェース。" },
-      { title: "レストランのブランドとサイト", category: "ブランド", desc: "プレミアムなジョージア料理店の完全なアイデンティティシステム。" },
-      { title: "フィットネス追跡アプリ", category: "モバイル", desc: "ワークアウトと進捗を追跡するクロスプラットフォームアプリ。" },
-      { title: "法律事務所のサイト", category: "ウェブ", desc: "案件管理と相談予約を備えたプロフェッショナルなサイト。" },
-      { title: "不動産ポータル", category: "ウェブ", desc: "地図統合を備えた物件掲載プラットフォーム。" },
+      { title: "Chateau Iveri", category: "ウェブ", desc: "没入感のあるビジュアル、テイスティング、宿泊予約を備えた、ジョージアのワイナリー＆ホスピタリティサイト。" },
+      { title: "SBuilding", category: "ウェブ", desc: "バトゥミの住宅タワープロジェクトを紹介する建設・不動産デベロッパーのサイト。" },
+      { title: "AISI Group", category: "ウェブ", desc: "プレミアムな住宅・商業開発向けの不動産投資プラットフォーム。" },
+      { title: "Daud Travel", category: "ウェブ", desc: "ジョージアのツアー、送迎、アドベンチャーを予約できる旅行会社のサイト。" },
+      { title: "United Company", category: "ウェブ", desc: "バトゥミのアパート、住宅、商業用不動産を扱う建設・不動産ポータル。" },
+      { title: "Roommate", category: "ウェブ", desc: "ルームメイトや部屋、アパートを探すためのマッチングプラットフォーム。" },
+      { title: "Prestige Audit", category: "ウェブ", desc: "財務監査、税務、経営コンサルティング会社のサイト。" },
+      { title: "GB Valuation", category: "ウェブ", desc: "法的・保険目的のための認定不動産・資産評価プラットフォーム。" },
+      { title: "Geo Care Group", category: "ウェブ", desc: "非緊急医療搬送サービスの予約サイト。" },
     ],
     page: {
       badge: "実績",

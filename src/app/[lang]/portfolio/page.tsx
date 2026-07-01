@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ProjectVisual } from "@/components/ui/project-visual";
@@ -10,44 +9,29 @@ import CtaCard from "@/components/shared/CtaCard";
 import { useT } from "@/components/i18n/I18nProvider";
 import { fadeUp, stagger } from "@/lib/animations";
 
-const projectMeta = [
-  { color: "from-blue-500 to-violet-600", tags: ["Next.js", "Stripe", "PostgreSQL"] },
-  { color: "from-violet-500 to-indigo-700", tags: ["React", "Tailwind", "Recharts"] },
-  { color: "from-orange-500 to-rose-600", tags: ["Figma", "Next.js", "GSAP"] },
-  { color: "from-emerald-500 to-green-700", tags: ["React Native", "Expo", "Firebase"] },
-  { color: "from-slate-500 to-gray-700", tags: ["Next.js", "Sanity", "Tailwind"] },
-  { color: "from-cyan-500 to-teal-700", tags: ["Next.js", "Mapbox", "Prisma"] },
+type ProjectMeta = { color: string; tags: string[]; image?: string; link?: string };
+
+const projectMeta: ProjectMeta[] = [
+  { color: "from-amber-600 to-rose-800", tags: ["Next.js", "Framer Motion", "Bookings"], image: "/portfolio/chateau-iveri.jpg", link: "https://www.chateauiveri.ge/en" },
+  { color: "from-blue-600 to-slate-800", tags: ["Web Design", "Real Estate", "Multilingual"], image: "/portfolio/sbuilding.jpg", link: "https://sbuilding.ge/en" },
+  { color: "from-slate-600 to-zinc-800", tags: ["Web Design", "Real Estate", "Investment"], image: "/portfolio/aisigroup.jpg", link: "https://aisigroup.ge/en" },
+  { color: "from-emerald-600 to-teal-800", tags: ["Web Design", "Tourism", "Booking"], image: "/portfolio/daudtravel.jpg", link: "https://daudtravel.com/en" },
+  { color: "from-sky-600 to-blue-800", tags: ["Web Design", "Real Estate", "Property Listings"], image: "/portfolio/unitedcompany.jpg", link: "https://unitedcompany.ge/?lang=en" },
+  { color: "from-green-600 to-emerald-800", tags: ["Web App", "Matching", "Booking"], image: "/portfolio/roommate.jpg", link: "https://roommate.ge/en" },
+  { color: "from-indigo-600 to-blue-900", tags: ["Web Design", "Consulting", "Multilingual"], image: "/portfolio/prestigeaudit.jpg", link: "https://prestigeaudit.ge/" },
+  { color: "from-cyan-600 to-slate-800", tags: ["Web Design", "Certification", "Booking"], image: "/portfolio/gbvaluation.jpg", link: "https://www.gbvaluation.ge/en" },
+  { color: "from-red-600 to-blue-900", tags: ["Web Design", "Healthcare", "Booking"], image: "/portfolio/geocaregroup.jpg", link: "https://geocaregroupllc.com/" },
 ];
 
 export default function PortfolioPage() {
   const t = useT();
   const p = t.portfolio.page;
-  const categories = t.portfolio.categories; // index 0 = "All"
-  const [active, setActive] = useState(0);
 
   const items = t.portfolio.items.map((item, i) => ({ ...item, ...projectMeta[i] }));
-  const filtered = active === 0 ? items : items.filter((it) => it.category === categories[active]);
 
   return (
     <main className="min-h-screen bg-white pt-20 pb-20">
-      <PageHero badge={p.badge} title={p.title} highlight={p.titleHighlight} subtitle={p.subtitle}>
-        {/* Category filters */}
-        <div className="flex flex-wrap justify-center gap-2">
-          {categories.map((cat, i) => (
-            <button
-              key={cat}
-              onClick={() => setActive(i)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
-                active === i
-                  ? "bg-primary text-[#1f1300] shadow-brand"
-                  : "bg-white text-muted-foreground ring-1 ring-border hover:text-foreground hover:ring-primary/40"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </PageHero>
+      <PageHero badge={p.badge} title={p.title} highlight={p.titleHighlight} subtitle={p.subtitle} />
 
       {/* Grid */}
       <section className="px-4 py-12 sm:px-6 lg:px-8">
@@ -56,18 +40,23 @@ export default function PortfolioPage() {
             variants={stagger}
             initial="hidden"
             animate="show"
-            key={active}
             className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {filtered.map((item) => (
-              <motion.div
+            {items.map((item) => {
+              const Card = item.link ? motion.a : motion.div;
+              const linkProps = item.link
+                ? { href: item.link, target: "_blank", rel: "noopener noreferrer" }
+                : {};
+              return (
+              <Card
                 key={item.title}
                 variants={fadeUp}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
                 className="group cursor-pointer overflow-hidden rounded-2xl bg-white ring-1 ring-border shadow-soft transition-all duration-300 hover:shadow-card hover:ring-primary/20"
+                {...linkProps}
               >
                 <div className="relative h-52 w-full overflow-hidden">
-                  <ProjectVisual gradient={item.color} category={item.category} />
+                  <ProjectVisual gradient={item.color} category={item.category} image={item.image} />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <div className="flex items-center gap-2 rounded-full border border-white/25 bg-white/15 px-4 py-2 text-sm font-semibold text-white backdrop-blur-sm">
                       <ExternalLink className="h-4 w-4" /> {t.common.viewWork}
@@ -86,8 +75,9 @@ export default function PortfolioPage() {
                     ))}
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              </Card>
+              );
+            })}
           </motion.div>
         </div>
       </section>
